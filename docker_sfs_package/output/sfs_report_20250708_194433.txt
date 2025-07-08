@@ -1,0 +1,7 @@
+LRO NAC Shape-from-Shading Report
+==================================================
+
+Processing Date: 2025-07-08 19:44:35
+Product: M1465739824RE
+Processing Time: 3.4 minutes
+Image Size: 512 x 512 pixels

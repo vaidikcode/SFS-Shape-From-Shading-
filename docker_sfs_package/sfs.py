@@ -90,8 +90,15 @@ class LunarReflectanceModel:
         return max(reflectance, 0.0)
 
 def load_image_data(image_path, metadata, crop_size=512):
-    rows = metadata['image_lines']
-    cols = metadata['line_samples']
+    # Handle both nested and flat metadata formats
+    if 'image_properties' in metadata:
+        # Nested format
+        rows = metadata['image_properties']['image_lines']
+        cols = metadata['image_properties']['line_samples']
+    else:
+        # Flat format
+        rows = metadata['image_lines']
+        cols = metadata['line_samples']
     
     logger.info(f"Loading image: {image_path} ({rows}x{cols})")
     
@@ -167,9 +174,17 @@ def shape_from_shading(image, metadata, max_iterations=1000):
     
     image_norm = image / np.max(image)
     
-    sun_elevation = 90.0 - metadata['incidence_angle']
-    sun_azimuth = metadata['sub_solar_azimuth']
-    emission_angle = metadata['emission_angle']
+    # Handle both nested and flat metadata formats
+    if 'geometry' in metadata:
+        # Nested format
+        sun_elevation = 90.0 - metadata['geometry']['incidence_angle']
+        sun_azimuth = metadata['geometry']['sub_solar_azimuth']
+        emission_angle = metadata['geometry']['emission_angle']
+    else:
+        # Flat format
+        sun_elevation = 90.0 - metadata['incidence_angle']
+        sun_azimuth = metadata['sub_solar_azimuth']
+        emission_angle = metadata['emission_angle']
     
     sun_elev_rad = np.radians(sun_elevation)
     sun_azim_rad = np.radians(sun_azimuth)
@@ -297,6 +312,20 @@ def save_results(dem, image, metadata, output_dir, processing_time):
         logger.warning(f"Image save failed: {e}")
         png_path = None
     
+    # Handle both nested and flat metadata formats
+    if 'geometry' in metadata:
+        # Nested format
+        resolution = metadata['image_properties']['resolution']
+        incidence_angle = metadata['geometry']['incidence_angle']
+        sub_solar_azimuth = metadata['geometry']['sub_solar_azimuth']
+        emission_angle = metadata['geometry']['emission_angle']
+    else:
+        # Flat format
+        resolution = metadata['resolution']
+        incidence_angle = metadata['incidence_angle']
+        sub_solar_azimuth = metadata['sub_solar_azimuth']
+        emission_angle = metadata['emission_angle']
+
     with open(report_path, 'w') as f:
         f.write("LRO NAC Shape-from-Shading Report\n")
         f.write("=" * 50 + "\n\n")
@@ -304,13 +333,13 @@ def save_results(dem, image, metadata, output_dir, processing_time):
         f.write(f"Product: {metadata.get('product', 'N/A')}\n")
         f.write(f"Processing Time: {processing_time/60:.1f} minutes\n")
         f.write(f"Image Size: {dem.shape[0]} x {dem.shape[1]} pixels\n")
-        f.write(f"Resolution: {metadata['resolution']:.3f} m/pixel\n\n")
+        f.write(f"Resolution: {resolution:.3f} m/pixel\n\n")
         
         f.write("Illumination:\n")
-        f.write(f"  Sun Elevation: {90.0 - metadata['incidence_angle']:.2f}°\n")
-        f.write(f"  Sun Azimuth: {metadata['sub_solar_azimuth']:.2f}°\n")
-        f.write(f"  Incidence: {metadata['incidence_angle']:.2f}°\n")
-        f.write(f"  Emission: {metadata['emission_angle']:.2f}°\n\n")
+        f.write(f"  Sun Elevation: {90.0 - incidence_angle:.2f}°\n")
+        f.write(f"  Sun Azimuth: {sub_solar_azimuth:.2f}°\n")
+        f.write(f"  Incidence: {incidence_angle:.2f}°\n")
+        f.write(f"  Emission: {emission_angle:.2f}°\n\n")
         
         f.write("DEM Statistics:\n")
         f.write(f"  Min Height: {dem.min():.6f}\n")

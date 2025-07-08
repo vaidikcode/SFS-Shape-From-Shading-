@@ -30,6 +30,9 @@ docker run -v $(pwd)/output:/output lro-sfs \
   --output /output
 ```
 
+Some data is pushed to github repo. But to run SFS on M1465739824RE, download img from https://data.lroc.im-ldi.com/lroc/view_lroc/LRO-L-LROC-2-EDR-V1.0/M1465739824RE first and then keep the image in root.
+
+
 # Shape-from-Shading Algorithm Documentation
 
 ## Overview
@@ -274,15 +277,6 @@ This iterative approach gradually "grows" the correct terrain shape.
 
 **Cause:** Learning rate too high
 **Solution:** Reduce learning rate or add more aggressive decay
-
-## Future Improvements
-
-Based on our experience, here are areas for enhancement:
-
-1. **Multi-scale processing:** Start with low resolution for global shape, then refine with high resolution
-2. **Better initialization:** Use stereo DEM as starting point when available
-3. **Regularization:** Add smoothness constraints to reduce noise
-4. **Advanced BRDF:** Include temperature-dependent effects for better accuracy
 
 ## Conclusion
 

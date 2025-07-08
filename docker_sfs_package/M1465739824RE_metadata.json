@@ -1,0 +1,82 @@
+{
+  "product": "M1465739824RE",
+  "pds_dataset_name": "LRO-L-LROC-2-EDR-V1.0",
+  "pds_volume_name": "LROLRC_0059A",
+  "instrument_host": "LRO",
+  "instrument": "LROC",
+  "original_product": "nacr002fa126",
+  "product_version": "v1.8",
+  "mission_phase_name": "FIFTH EXTENDED SCIENCE MISSION",
+  "rationale_desc": "TARGET OF OPPORTUNITY",
+  "data_quality": 0,
+  "timing": {
+    "nac_preroll_start_time": "2024-03-22T09:42:36",
+    "start_time": "2024-03-22T09:42:37",
+    "stop_time": "2024-03-22T09:43:04",
+    "spacecraft_clock_partition": 1,
+    "nac_spacecraft_clock_preroll_count": "732793356:46465",
+    "spacecraft_clock_start_count": "732793357:15766",
+    "spacecraft_clock_stop_count": "732793384:23029"
+  },
+  "target": {
+    "name": "MOON",
+    "orbit_number": 66336,
+    "slew_angle": -0.009720923032780384,
+    "lro_node_crossing": "D",
+    "lro_flight_direction": "+X"
+  },
+  "instrument_settings": {
+    "nac_line_exposure_duration": 0.0005168,
+    "nac_frame": "RIGHT",
+    "nac_dac_reset": 190,
+    "nac_channel_a_offset": 75,
+    "nac_channel_b_offset": 146,
+    "instrument_mode_code": 7,
+    "compand_select_code": 3,
+    "mode_compression": true,
+    "mode_test": false
+  },
+  "temperatures": {
+    "nac_temperature_scs": 3.723,
+    "nac_temperature_fpa": 19.76,
+    "nac_temperature_fpga": -8.708,
+    "nac_temperature_telescope": 7.687
+  },
+  "image_properties": {
+    "image_lines": 52224,
+    "line_samples": 5064,
+    "sample_bits": 8,
+    "scaled_pixel_width": 0.77,
+    "scaled_pixel_height": 0.82,
+    "resolution": 0.7928625413496627
+  },
+  "geometry": {
+    "emission_angle": 1.16,
+    "incidence_angle": 64.22,
+    "phase_angle": 63.11,
+    "north_azimuth": 259.82,
+    "sub_solar_azimuth": 200.37,
+    "sub_solar_latitude": -0.4,
+    "sub_solar_longitude": 33.51,
+    "sub_spacecraft_latitude": -44.88,
+    "sub_spacecraft_longitude": 340.95,
+    "solar_distance": 149419203.0,
+    "solar_longitude": 346.25
+  },
+  "coverage": {
+    "center_latitude": -44.89,
+    "center_longitude": 340.88,
+    "upper_right_latitude": -44.2,
+    "upper_right_longitude": 340.67,
+    "lower_right_latitude": -45.6,
+    "lower_right_longitude": 340.92,
+    "lower_left_latitude": -45.58,
+    "lower_left_longitude": 341.1,
+    "upper_left_latitude": -44.18,
+    "upper_left_longitude": 340.84
+  },
+  "spacecraft": {
+    "altitude": 77.05,
+    "target_center_distance": 1814.55
+  }
+}
